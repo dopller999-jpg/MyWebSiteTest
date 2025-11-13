@@ -1,121 +1,97 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-    <meta charset="UTF-8">
-    <title>Истории знаменитых людей</title>
-    <link rel="stylesheet" href="styles.css">
-    <style>
-        body { font-family: Arial, sans-serif; line-height: 1.6; padding: 20px; }
-        header { text-align: center; margin-bottom: 20px; }
-        footer { text-align: center; margin-top: 40px; color: #555; }
+<meta charset="UTF-8">
+<title>Истории знаменитых людей</title>
+<style>
+body { font-family: Arial, sans-serif; line-height: 1.6; padding: 20px; }
+header { text-align: center; margin-bottom: 20px; }
+footer { text-align: center; margin-top: 40px; color: #555; }
 
-        /* Вкладки */
-        .tabs { margin: 20px 0; text-align: center; }
-        .tab-button { padding: 10px 20px; margin: 0 5px; cursor: pointer; border: 1px solid #007BFF; background: #fff; border-radius: 5px; transition: all 0.3s ease; }
-        .tab-button:hover { background-color: #007BFF; color: #fff; }
-        .tab-button.active { background-color: #007BFF; color: white; }
+/* Вкладки */
+.tabs { margin: 20px 0; text-align: center; }
+.tab-button { padding: 10px 20px; margin: 0 5px; cursor: pointer; border: 1px solid #007BFF; background: #fff; border-radius: 5px; transition: all 0.3s ease; }
+.tab-button:hover { background-color: #007BFF; color: #fff; }
+.tab-button.active { background-color: #007BFF; color: white; }
 
-        /* Анимация вкладок */
-        main { position: relative; min-height: 700px; } /* достаточная высота для всех вкладок */
-        .tab-content {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            opacity: 0;
-            transform: translateY(20px);
-            transition: opacity 0.4s ease, transform 0.4s ease;
-            pointer-events: none;
-        }
-        .tab-content.active {
-            opacity: 1;
-            transform: translateY(0);
-            pointer-events: auto;
-        }
+/* Анимация вкладок */
+.tab-content { 
+    max-height: 0; 
+    opacity: 0; 
+    transform: translateY(20px); 
+    overflow: hidden; 
+    transition: all 0.4s ease; 
+}
+.tab-content.active { 
+    max-height: 3000px; /* достаточно для любого контента */
+    opacity: 1; 
+    transform: translateY(0); 
+}
 
-        /* Donation Alerts iframe */
-        #donation iframe {
-            width: 100%;
-            height: 600px;
-            border: none;
-        }
-    </style>
+/* Donation Alerts iframe */
+#donation iframe { width: 100%; height: 600px; border: none; }
+</style>
 </head>
 <body>
-    <header>
-        <h1>Знаменитые люди</h1>
-    </header>
 
-    <!-- Виджет Google Translate -->
-    <div id="google_translate_element" style="margin: 20px 0;"></div>
+<header>
+    <h1>Знаменитые люди</h1>
+</header>
 
-    <main>
-        <!-- Вкладки -->
-        <div class="tabs">
-            <button class="tab-button active" data-tab="esports">Киберспортсмены</button>
-            <button class="tab-button" data-tab="youtubers">Ютуберы</button>
-            <button class="tab-button" data-tab="business">Бизнесмены</button>
-            <button class="tab-button" data-tab="donation">Поддержка</button>
-        </div>
+<div id="google_translate_element" style="margin: 20px 0;"></div>
 
-        <!-- Контент вкладок -->
-        <div class="tab-content active" id="esports">
-            <h2>Киберспортсмены</h2>
-            <h3>Александр Костылев (s1mple)</h3>
-            <p>Александр Костылев (s1mple) — путь от талантливого подростка до легенды киберспорта...</p>
-        </div>
+<div class="tabs">
+    <button class="tab-button active" data-tab="esports">Киберспортсмены</button>
+    <button class="tab-button" data-tab="youtubers">Ютуберы</button>
+    <button class="tab-button" data-tab="business">Бизнесмены</button>
+    <button class="tab-button" data-tab="donation">Поддержка</button>
+</div>
 
-        <div class="tab-content" id="youtubers">
-            <h2>Ютуберы</h2>
-            <h3>MrBeast</h3>
-            <p>Джимми Дональдсон, известный как MrBeast, родился 7 мая 1998 года...</p>
-            <h3>Мармок</h3>
-            <p>Алексей, известный в интернете как Мармок, родился в России...</p>
-        </div>
+<div class="tab-content active" id="esports">
+    <h2>Киберспортсмены</h2>
+    <p>Контент о киберспортсменах...</p>
+</div>
 
-        <div class="tab-content" id="business">
-            <h2>Бизнесмены и разработчики</h2>
-            <h3>Гейб Ньюэлл</h3>
-            <p>Гейб Ньюэлл родился 3 ноября 1962 года в США...</p>
-            <h3>Маркус Перссон</h3>
-            <p>Маркус Перссон, известный как Notch, родился 1 июня 1979 года в Швеции...</p>
-        </div>
+<div class="tab-content" id="youtubers">
+    <h2>Ютуберы</h2>
+    <p>Контент о ютуберах...</p>
+</div>
 
-        <div class="tab-content" id="donation">
-            <h2>Поддержка</h2>
-            <p>Вы можете поддержать проект через Donation Alerts:</p>
-            <iframe src="https://www.donationalerts.com/r/dopll3r" allowtransparency="true" scrolling="no"></iframe>
-        </div>
-    </main>
+<div class="tab-content" id="business">
+    <h2>Бизнесмены</h2>
+    <p>Контент о бизнесменах...</p>
+</div>
 
-    <footer>
-        <p>© 2025 Знаменитые люди и их истории</p>
-    </footer>
+<div class="tab-content" id="donation">
+    <h2>Поддержка</h2>
+    <p>Вы можете поддержать проект через Donation Alerts:</p>
+    <iframe src="https://www.donationalerts.com/r/dopll3r" allowtransparency="true" scrolling="no"></iframe>
+</div>
 
-    <!-- Скрипт для вкладок -->
-    <script>
-        const tabButtons = document.querySelectorAll('.tab-button');
-        const tabContents = document.querySelectorAll('.tab-content');
+<footer>
+    <p>© 2025 Знаменитые люди и их истории</p>
+</footer>
 
-        tabButtons.forEach(button => {
-            button.addEventListener('click', () => {
-                // Убираем активность
-                tabButtons.forEach(btn => btn.classList.remove('active'));
-                tabContents.forEach(content => content.classList.remove('active'));
+<script>
+const tabButtons = document.querySelectorAll('.tab-button');
+const tabContents = document.querySelectorAll('.tab-content');
 
-                // Делаем активными выбранные
-                button.classList.add('active');
-                document.getElementById(button.dataset.tab).classList.add('active');
-            });
-        });
-    </script>
+tabButtons.forEach(button => {
+    button.addEventListener('click', () => {
+        tabButtons.forEach(btn => btn.classList.remove('active'));
+        tabContents.forEach(content => content.classList.remove('active'));
+        button.classList.add('active');
+        document.getElementById(button.dataset.tab).classList.add('active');
+    });
+});
+</script>
 
-    <!-- Google Translate -->
-    <script type="text/javascript">
-        function googleTranslateElementInit() {
-            new google.translate.TranslateElement({pageLanguage: 'ru'}, 'google_translate_element');
-        }
-    </script>
-    <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+<script type="text/javascript">
+function googleTranslateElementInit() {
+    new google.translate.TranslateElement({pageLanguage: 'ru'}, 'google_translate_element');
+}
+</script>
+<script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+
 </body>
 </html>
