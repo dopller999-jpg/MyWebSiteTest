@@ -3,75 +3,84 @@
 <head>
 <meta charset="UTF-8">
 <title>Истории знаменитых людей</title>
+<link rel="stylesheet" href="styles.css">
 <style>
-body { font-family: Arial, sans-serif; line-height: 1.6; padding: 20px; }
-header { text-align: center; margin-bottom: 20px; }
-footer { text-align: center; margin-top: 40px; color: #555; }
+    body { font-family: Arial, sans-serif; line-height: 1.6; padding: 20px; }
 
-/* Вкладки */
-.tabs { margin: 20px 0; text-align: center; }
-.tab-button { padding: 10px 20px; margin: 0 5px; cursor: pointer; border: 1px solid #007BFF; background: #fff; border-radius: 5px; transition: all 0.3s ease; }
-.tab-button:hover { background-color: #007BFF; color: #fff; }
-.tab-button.active { background-color: #007BFF; color: white; }
+    /* Вкладки */
+    .tabs { margin: 20px 0; text-align: center; }
+    .tab-button { padding: 10px 20px; cursor: pointer; border: 1px solid #007BFF; background: #fff; border-radius: 5px; margin: 0 5px; transition: all 0.3s ease; }
+    .tab-button.active { background-color: #007BFF; color: white; }
 
-/* Анимация вкладок */
-.tab-content { 
-    max-height: 0; 
-    opacity: 0; 
-    transform: translateY(20px); 
-    overflow: hidden; 
-    transition: all 0.4s ease; 
-}
-.tab-content.active { 
-    max-height: 3000px; /* достаточно для любого контента */
-    opacity: 1; 
-    transform: translateY(0); 
-}
+    /* Контент вкладок с анимацией */
+    .tab-content {
+        display: none; /* скрываем по умолчанию */
+        opacity: 0;
+        transform: translateY(20px);
+        transition: opacity 0.4s ease, transform 0.4s ease;
+    }
 
-/* Donation Alerts iframe */
-#donation iframe { width: 100%; height: 600px; border: none; }
+    .tab-content.active {
+        display: block; /* показываем активную вкладку */
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    iframe { width: 100%; border: none; }
 </style>
 </head>
 <body>
-
 <header>
     <h1>Знаменитые люди</h1>
 </header>
 
+<!-- Виджет Google Translate -->
 <div id="google_translate_element" style="margin: 20px 0;"></div>
 
-<div class="tabs">
-    <button class="tab-button active" data-tab="esports">Киберспортсмены</button>
-    <button class="tab-button" data-tab="youtubers">Ютуберы</button>
-    <button class="tab-button" data-tab="business">Бизнесмены</button>
-    <button class="tab-button" data-tab="donation">Поддержка</button>
-</div>
+<main>
+    <!-- Вкладки -->
+    <div class="tabs">
+        <button class="tab-button active" data-tab="esports">Киберспортсмены</button>
+        <button class="tab-button" data-tab="youtubers">Ютуберы</button>
+        <button class="tab-button" data-tab="business">Бизнесмены</button>
+        <button class="tab-button" data-tab="donation">Поддержка</button>
+    </div>
 
-<div class="tab-content active" id="esports">
-    <h2>Киберспортсмены</h2>
-    <p>Контент о киберспортсменах...</p>
-</div>
+    <!-- Контент вкладок -->
+    <div class="tab-content active" id="esports">
+        <h2>Киберспортсмены</h2>
+        <h3>Александр Костылев (s1mple)</h3>
+        <p>...текст о s1mple...</p>
+    </div>
 
-<div class="tab-content" id="youtubers">
-    <h2>Ютуберы</h2>
-    <p>Контент о ютуберах...</p>
-</div>
+    <div class="tab-content" id="youtubers">
+        <h2>Ютуберы</h2>
+        <h3>MrBeast</h3>
+        <p>...текст о MrBeast...</p>
+        <h3>Мармок</h3>
+        <p>...текст о Мармоке...</p>
+    </div>
 
-<div class="tab-content" id="business">
-    <h2>Бизнесмены</h2>
-    <p>Контент о бизнесменах...</p>
-</div>
+    <div class="tab-content" id="business">
+        <h2>Бизнесмены и разработчики</h2>
+        <h3>Гейб Ньюэлл</h3>
+        <p>...текст о Гейбе Ньюэлле...</p>
+        <h3>Маркус Перссон</h3>
+        <p>...текст о Маркусе Перссоне...</p>
+    </div>
 
-<div class="tab-content" id="donation">
-    <h2>Поддержка</h2>
-    <p>Вы можете поддержать проект через Donation Alerts:</p>
-    <iframe src="https://www.donationalerts.com/r/dopll3r" allowtransparency="true" scrolling="no"></iframe>
-</div>
+    <div class="tab-content" id="donation">
+        <h2>Поддержка</h2>
+        <p>Вы можете поддержать проект через Donation Alerts:</p>
+        <iframe src="https://www.donationalerts.com/r/dopll3r" style="height:600px;" allowtransparency="true" scrolling="no"></iframe>
+    </div>
+</main>
 
 <footer>
     <p>© 2025 Знаменитые люди и их истории</p>
 </footer>
 
+<!-- Скрипт для вкладок с анимацией -->
 <script>
 const tabButtons = document.querySelectorAll('.tab-button');
 const tabContents = document.querySelectorAll('.tab-content');
@@ -80,18 +89,20 @@ tabButtons.forEach(button => {
     button.addEventListener('click', () => {
         tabButtons.forEach(btn => btn.classList.remove('active'));
         tabContents.forEach(content => content.classList.remove('active'));
+
         button.classList.add('active');
-        document.getElementById(button.dataset.tab).classList.add('active');
+        const activeTab = document.getElementById(button.dataset.tab);
+        setTimeout(() => activeTab.classList.add('active'), 10);
     });
 });
 </script>
 
+<!-- Google Translate -->
 <script type="text/javascript">
 function googleTranslateElementInit() {
     new google.translate.TranslateElement({pageLanguage: 'ru'}, 'google_translate_element');
 }
 </script>
 <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
-
 </body>
 </html>
