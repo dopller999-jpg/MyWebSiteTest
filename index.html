@@ -1,73 +1,30 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-<meta charset="UTF-8">
-<title>Истории знаменитых людей</title>
-<style>
-    body { font-family: Arial, sans-serif; line-height: 1.6; padding: 20px; }
+    <meta charset="UTF-8">
+    <title>Истории знаменитых людей</title>
+    <style>
+        body { font-family: Arial, sans-serif; padding: 20px; line-height: 1.6; }
+        .tabs { margin: 20px 0; }
+        .tab-button, .sub-tab-button { padding: 10px 20px; cursor: pointer; border: none; margin-right: 5px; }
+        .tab-button.active, .sub-tab-button.active { background-color: #007BFF; color: white; }
+        .tab-content, .sub-tab-content { display: none; opacity: 0; transform: translateY(20px); transition: opacity 0.4s ease, transform 0.4s ease; margin-top: 20px; }
+        .tab-content.active, .sub-tab-content.active { display: block; opacity: 1; transform: translateY(0); }
 
-    /* Основные вкладки */
-    .tabs { margin: 20px 0; }
-    .tab-button {
-        padding: 10px 20px;
-        cursor: pointer;
-        background-color: #f0f0f0;
-        border: none;
-        margin-right: 5px;
-        transition: background-color 0.3s, color 0.3s;
-    }
-    .tab-button.active { background-color: #007BFF; color: white; }
+        /* Donation Alerts iframe scroll */
+        #donation iframe { width: 100%; height: 600px; border: none; overflow: auto; }
 
-    /* Контент вкладок */
-    .tab-content {
-        display: none;
-        opacity: 0;
-        transform: translateY(20px);
-        transition: opacity 0.4s ease, transform 0.4s ease;
-    }
-    .tab-content.active {
-        display: block;
-        opacity: 1;
-        transform: translateY(0);
-    }
-
-    /* Вложенные вкладки */
-    .sub-tabs { margin: 10px 0; }
-    .sub-tab-button {
-        padding: 5px 10px;
-        cursor: pointer;
-        background-color: #ddd;
-        border: none;
-        margin-right: 5px;
-        transition: background-color 0.3s;
-    }
-    .sub-tab-button.active { background-color: #28a745; color: white; }
-
-    /* Контент под-вкладок */
-    .sub-tab-content {
-        display: none;
-        opacity: 0;
-        transform: translateY(20px);
-        transition: opacity 0.4s ease, transform 0.4s ease;
-        margin-top: 10px;
-    }
-    .sub-tab-content.active {
-        display: block;
-        opacity: 1;
-        transform: translateY(0);
-    }
-
-    /* Donation Alerts прокрутка */
-    #donation { max-height: 80vh; overflow-y: auto; padding-right: 5px; }
-    iframe { width: 100%; min-height: 600px; border: none; }
-</style>
+        /* Под-вкладки */
+        .sub-tabs { margin-top: 10px; }
+    </style>
 </head>
 <body>
+
 <header>
     <h1>Знаменитые люди</h1>
 </header>
 
-<!-- Google Translate -->
+<!-- Виджет Google Translate -->
 <div id="google_translate_element" style="margin: 20px 0;"></div>
 
 <main>
@@ -82,55 +39,38 @@
     <!-- Контент вкладок -->
     <div class="tab-content active" id="esports">
         <h2>Киберспортсмены</h2>
-        <div class="sub-tabs">
-            <button class="sub-tab-button active" data-subtab="s1mple">s1mple</button>
-            <button class="sub-tab-button" data-subtab="sh1ro">sh1ro</button>
-        </div>
-        <div class="sub-tab-content active" id="s1mple">
-            <h3>Александр Костылев (s1mple)</h3>
-            <p>Биография s1mple...</p>
-        </div>
-        <div class="sub-tab-content" id="sh1ro">
-            <h3>Шарипов (sh1ro)</h3>
-            <p>Биография sh1ro...</p>
-        </div>
+        <p>Александр Костылев (s1mple) — путь от талантливого подростка до легенды киберспорта...</p>
     </div>
 
     <div class="tab-content" id="youtubers">
         <h2>Ютуберы</h2>
-        <div class="sub-tabs">
-            <button class="sub-tab-button active" data-subtab="mrbeast">MrBeast</button>
-            <button class="sub-tab-button" data-subtab="marmok">Мармок</button>
-        </div>
-        <div class="sub-tab-content active" id="mrbeast">
-            <h3>MrBeast</h3>
-            <p>Биография MrBeast...</p>
-        </div>
-        <div class="sub-tab-content" id="marmok">
-            <h3>Мармок</h3>
-            <p>Биография Мармок...</p>
-        </div>
+        <p>MrBeast и Мармок — их истории успеха...</p>
     </div>
 
     <div class="tab-content" id="business">
         <h2>Бизнесмены и разработчики</h2>
+
+        <!-- Под-вкладки -->
         <div class="sub-tabs">
             <button class="sub-tab-button active" data-subtab="gabe">Гейб Ньюэлл</button>
             <button class="sub-tab-button" data-subtab="notch">Маркус Перссон</button>
         </div>
+
+        <!-- Контент под-вкладок -->
         <div class="sub-tab-content active" id="gabe">
             <h3>Гейб Ньюэлл</h3>
-            <p>Гейб Ньюэлл родился 3 ноября 1962 года в США. С детства проявлял интерес к технологиям и компьютерам. Учился в Гарварде, ушел работать в Microsoft, позже основал Valve, создал Half-Life, Counter-Strike, Portal и Dota 2. Известен как новатор и разработчик Steam.</p>
+            <p>Гейб Ньюэлл — основатель Valve, история успеха, карьерный путь и достижения...</p>
         </div>
         <div class="sub-tab-content" id="notch">
             <h3>Маркус Перссон</h3>
-            <p>Маркус Перссон (Notch) родился 1 июня 1979 года в Швеции. Создал Minecraft, основал Mojang, продал компании Microsoft, оставаясь независимым разработчиком.</p>
+            <p>Маркус Перссон — создатель Minecraft, путь от программиста до глобального успеха...</p>
         </div>
     </div>
 
     <div class="tab-content" id="donation">
         <h2>Поддержка</h2>
-        <iframe src="https://www.donationalerts.com/r/dopll3r" scrolling="yes"></iframe>
+        <p>Вы можете поддержать проект через Donation Alerts:</p>
+        <iframe src="https://www.donationalerts.com/r/dopll3r" allowtransparency="true" scrolling="yes"></iframe>
     </div>
 </main>
 
@@ -138,7 +78,7 @@
     <p>© 2025 Знаменитые люди и их истории</p>
 </footer>
 
-<!-- Скрипт вкладок -->
+<!-- Скрипт для вкладок и под-вкладок -->
 <script>
     // Основные вкладки
     const tabButtons = document.querySelectorAll('.tab-button');
@@ -148,32 +88,40 @@
         button.addEventListener('click', () => {
             tabButtons.forEach(btn => btn.classList.remove('active'));
             tabContents.forEach(content => content.classList.remove('active'));
+
             button.classList.add('active');
-            document.getElementById(button.dataset.tab).classList.add('active');
+            const activeTab = document.getElementById(button.dataset.tab);
+            activeTab.classList.add('active');
+
+            // Активируем первую под-вкладку, если есть
+            const firstSubTab = activeTab.querySelector('.sub-tab-button');
+            if(firstSubTab){
+                firstSubTab.click();
+            }
         });
     });
 
     // Под-вкладки
     const subTabButtons = document.querySelectorAll('.sub-tab-button');
-    const subTabContents = document.querySelectorAll('.sub-tab-content');
-
     subTabButtons.forEach(button => {
         button.addEventListener('click', () => {
-            const parent = button.closest('.tab-content');
-            const siblingsBtns = parent.querySelectorAll('.sub-tab-button');
-            const siblingsContents = parent.querySelectorAll('.sub-tab-content');
-            siblingsBtns.forEach(btn => btn.classList.remove('active'));
-            siblingsContents.forEach(content => content.classList.remove('active'));
+            const parentTab = button.closest('.tab-content');
+            const siblingButtons = parentTab.querySelectorAll('.sub-tab-button');
+            const siblingContents = parentTab.querySelectorAll('.sub-tab-content');
+
+            siblingButtons.forEach(btn => btn.classList.remove('active'));
+            siblingContents.forEach(content => content.classList.remove('active'));
+
             button.classList.add('active');
             document.getElementById(button.dataset.subtab).classList.add('active');
         });
     });
 </script>
 
-<!-- Google Translate -->
+<!-- Скрипт Google Translate -->
 <script type="text/javascript">
 function googleTranslateElementInit() {
-  new google.translate.TranslateElement({pageLanguage: 'ru'}, 'google_translate_element');
+    new google.translate.TranslateElement({pageLanguage: 'ru'}, 'google_translate_element');
 }
 </script>
 <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
