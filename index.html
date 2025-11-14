@@ -16,7 +16,6 @@
         margin-right: 5px;
         transition: background-color 0.3s, color 0.3s;
     }
-    .tab-button:hover { background-color: #e0e0e0; }
     .tab-button.active { background-color: #007BFF; color: white; }
 
     /* Контент вкладок */
@@ -50,6 +49,7 @@
         opacity: 0;
         transform: translateY(20px);
         transition: opacity 0.4s ease, transform 0.4s ease;
+        margin-top: 10px;
     }
     .sub-tab-content.active {
         display: block;
@@ -82,32 +82,49 @@
     <!-- Контент вкладок -->
     <div class="tab-content active" id="esports">
         <h2>Киберспортсмены</h2>
-        <p>Здесь будет биография киберспортсменов...</p>
+        <div class="sub-tabs">
+            <button class="sub-tab-button active" data-subtab="s1mple">s1mple</button>
+            <button class="sub-tab-button" data-subtab="sh1ro">sh1ro</button>
+        </div>
+        <div class="sub-tab-content active" id="s1mple">
+            <h3>Александр Костылев (s1mple)</h3>
+            <p>Биография s1mple...</p>
+        </div>
+        <div class="sub-tab-content" id="sh1ro">
+            <h3>Шарипов (sh1ro)</h3>
+            <p>Биография sh1ro...</p>
+        </div>
     </div>
 
     <div class="tab-content" id="youtubers">
         <h2>Ютуберы</h2>
-        <p>Здесь будет биография ютуберов...</p>
+        <div class="sub-tabs">
+            <button class="sub-tab-button active" data-subtab="mrbeast">MrBeast</button>
+            <button class="sub-tab-button" data-subtab="marmok">Мармок</button>
+        </div>
+        <div class="sub-tab-content active" id="mrbeast">
+            <h3>MrBeast</h3>
+            <p>Биография MrBeast...</p>
+        </div>
+        <div class="sub-tab-content" id="marmok">
+            <h3>Мармок</h3>
+            <p>Биография Мармок...</p>
+        </div>
     </div>
 
     <div class="tab-content" id="business">
         <h2>Бизнесмены и разработчики</h2>
-
-        <!-- Под-вкладки для выбора человека -->
         <div class="sub-tabs">
             <button class="sub-tab-button active" data-subtab="gabe">Гейб Ньюэлл</button>
             <button class="sub-tab-button" data-subtab="notch">Маркус Перссон</button>
         </div>
-
-        <!-- Контент под-вкладок -->
         <div class="sub-tab-content active" id="gabe">
             <h3>Гейб Ньюэлл</h3>
-            <p>Гейб Ньюэлл родился 3 ноября 1962 года в США. С детства проявлял интерес к технологиям и компьютерам. Учился в Гарварде, но ушел, чтобы работать в Microsoft. Позже основал компанию Valve, создав Half-Life, Counter-Strike, Portal и Dota 2. Известен как новатор в индустрии видеоигр и разработчик платформы Steam.</p>
+            <p>Гейб Ньюэлл родился 3 ноября 1962 года в США. С детства проявлял интерес к технологиям и компьютерам. Учился в Гарварде, ушел работать в Microsoft, позже основал Valve, создал Half-Life, Counter-Strike, Portal и Dota 2. Известен как новатор и разработчик Steam.</p>
         </div>
-
         <div class="sub-tab-content" id="notch">
             <h3>Маркус Перссон</h3>
-            <p>Маркус Перссон (Notch) родился 1 июня 1979 года в Швеции. С раннего возраста увлекался программированием и видеоиграми. Создал Minecraft, которая стала мировым феноменом. Основал Mojang, продал компанию Microsoft, оставаясь независимым разработчиком. Вдохновил миллионы людей на создание игр и цифрового творчества.</p>
+            <p>Маркус Перссон (Notch) родился 1 июня 1979 года в Швеции. Создал Minecraft, основал Mojang, продал компании Microsoft, оставаясь независимым разработчиком.</p>
         </div>
     </div>
 
@@ -131,7 +148,6 @@
         button.addEventListener('click', () => {
             tabButtons.forEach(btn => btn.classList.remove('active'));
             tabContents.forEach(content => content.classList.remove('active'));
-
             button.classList.add('active');
             document.getElementById(button.dataset.tab).classList.add('active');
         });
@@ -143,9 +159,11 @@
 
     subTabButtons.forEach(button => {
         button.addEventListener('click', () => {
-            subTabButtons.forEach(btn => btn.classList.remove('active'));
-            subTabContents.forEach(content => content.classList.remove('active'));
-
+            const parent = button.closest('.tab-content');
+            const siblingsBtns = parent.querySelectorAll('.sub-tab-button');
+            const siblingsContents = parent.querySelectorAll('.sub-tab-content');
+            siblingsBtns.forEach(btn => btn.classList.remove('active'));
+            siblingsContents.forEach(content => content.classList.remove('active'));
             button.classList.add('active');
             document.getElementById(button.dataset.subtab).classList.add('active');
         });
