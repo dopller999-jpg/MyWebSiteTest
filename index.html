@@ -44,6 +44,19 @@
     }
     .sub-tab-button.active { background-color: #28a745; color: white; }
 
+    /* Контент под-вкладок */
+    .sub-tab-content {
+        display: none;
+        opacity: 0;
+        transform: translateY(20px);
+        transition: opacity 0.4s ease, transform 0.4s ease;
+    }
+    .sub-tab-content.active {
+        display: block;
+        opacity: 1;
+        transform: translateY(0);
+    }
+
     /* Donation Alerts прокрутка */
     #donation { max-height: 80vh; overflow-y: auto; padding-right: 5px; }
     iframe { width: 100%; min-height: 600px; border: none; }
@@ -66,16 +79,17 @@
     <!-- Контент вкладок -->
     <div class="tab-content active" id="esports">
         <h2>Киберспортсмены</h2>
-        <p>Контент киберспортсменов...</p>
+        <p>Здесь будет биография киберспортсменов...</p>
     </div>
 
     <div class="tab-content" id="youtubers">
         <h2>Ютуберы</h2>
-        <p>Контент ютуберов...</p>
+        <p>Здесь будет биография ютуберов...</p>
     </div>
 
     <div class="tab-content" id="business">
         <h2>Бизнесмены и разработчики</h2>
+
         <!-- Под-вкладки для выбора человека -->
         <div class="sub-tabs">
             <button class="sub-tab-button active" data-subtab="gabe">Гейб Ньюэлл</button>
@@ -85,11 +99,12 @@
         <!-- Контент под-вкладок -->
         <div class="sub-tab-content active" id="gabe">
             <h3>Гейб Ньюэлл</h3>
-            <p>Гейб Ньюэлл родился 3 ноября 1962 года в США...</p>
+            <p>Гейб Ньюэлл родился 3 ноября 1962 года в США. С детства проявлял интерес к технологиям и компьютерам. Учился в Гарварде, но ушел, чтобы работать в Microsoft. Позже основал компанию Valve, создав Half-Life, Counter-Strike, Portal и Dota 2. Известен как новатор в индустрии видеоигр и разработчик платформы Steam.</p>
         </div>
+
         <div class="sub-tab-content" id="notch">
             <h3>Маркус Перссон</h3>
-            <p>Маркус Перссон родился 1 июня 1979 года в Швеции...</p>
+            <p>Маркус Перссон (Notch) родился 1 июня 1979 года в Швеции. С раннего возраста увлекался программированием и видеоиграми. Создал Minecraft, которая стала мировым феноменом. Основал Mojang, продал компанию Microsoft, оставаясь независимым разработчиком. Вдохновил миллионы людей на создание игр и цифрового творчества.</p>
         </div>
     </div>
 
@@ -105,6 +120,7 @@
 
 <!-- Скрипт вкладок -->
 <script>
+    // Основные вкладки
     const tabButtons = document.querySelectorAll('.tab-button');
     const tabContents = document.querySelectorAll('.tab-content');
 
@@ -114,12 +130,11 @@
             tabContents.forEach(content => content.classList.remove('active'));
 
             button.classList.add('active');
-            const activeTab = document.getElementById(button.dataset.tab);
-            setTimeout(() => activeTab.classList.add('active'), 50);
+            document.getElementById(button.dataset.tab).classList.add('active');
         });
     });
 
-    // Скрипт под-вкладок (для бизнесменов)
+    // Под-вкладки
     const subTabButtons = document.querySelectorAll('.sub-tab-button');
     const subTabContents = document.querySelectorAll('.sub-tab-content');
 
@@ -129,8 +144,7 @@
             subTabContents.forEach(content => content.classList.remove('active'));
 
             button.classList.add('active');
-            const activeSubTab = document.getElementById(button.dataset.subtab);
-            setTimeout(() => activeSubTab.classList.add('active'), 50);
+            document.getElementById(button.dataset.subtab).classList.add('active');
         });
     });
 </script>
